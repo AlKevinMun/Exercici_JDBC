@@ -8,11 +8,24 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Clase de los mapas
+ */
 public class MapController {
+    /**
+     * Atributo necesario para conectarte a la base de datos
+     */
     private Connection connection;
+    /**
+     * Constructor
+     * @param connection Requiere la clase para conectarse a la base de datos.
+     */
 
     public MapController(Connection connection) {this.connection = connection;}
-
+    /**
+     * método para crear la tabla en al base de datos.
+     * @throws SQLException
+     */
     public void createTable() throws SQLException {
 
         Statement sts = connection.createStatement();
@@ -25,7 +38,11 @@ public class MapController {
 
         sts.executeUpdate(sql);
     }
-
+    /**
+     * método para leer los ficheros CSV y hacer un select basándose en los datos que a leido.
+     * @throws IOException
+     * @throws SQLException
+     */
     public void readDataFromCSV() throws IOException, SQLException {
         CSVReader reader = new CSVReader(new FileReader("resources/map.csv"));
         String[] data = null;

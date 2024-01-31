@@ -14,15 +14,25 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * Clase para los jugadores
+ */
 public class PlayerController {
-
+    /**
+     * Atributo necesario para conectarte a la base de datos
+     */
     private Connection connection;
-
+    /**
+     * Constructor
+     * @param connection Requiere la clase para conectarse a la base de datos.
+     */
     public PlayerController(Connection connection) {
         this.connection = connection;
     }
-
+    /**
+     * método para crear la tabla en al base de datos.
+     * @throws SQLException
+     */
     public void createTable() throws SQLException {
 
         Statement sts = connection.createStatement();
@@ -34,11 +44,16 @@ public class PlayerController {
                 "wld   VARCHAR(50) not null,\n" +
                 "commander VARCHAR(20),\n" +
                 "winrate INTEGER not null,\n" +
-                "FOREIGN KEY(commander) REFERENCES commander(commander_name)\n)";
+                "FOREIGN KEY(commander) REFERENCES commander(commander_name) ON DELETE CASCADE\n)";
 
         sts.executeUpdate(sql);
     }
 
+    /**
+     * método para leer los ficheros CSV y hacer un select basándose en los datos que a leido.
+     * @throws IOException
+     * @throws SQLException
+     */
     public void readDataFromCSV() throws IOException, SQLException {
         CSVReader reader = new CSVReader(new FileReader("resources/player.csv"));
         String[] data = null;

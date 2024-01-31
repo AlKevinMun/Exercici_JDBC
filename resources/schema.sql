@@ -32,7 +32,7 @@ CREATE TABLE map
       wld   VARCHAR(50) not null,
       commander VARCHAR(20),
       winrate INTEGER not null,
-      FOREIGN KEY(commander) REFERENCES commander(commander_name)
+      FOREIGN KEY(commander) REFERENCES commander(commander_name) ON DELETE CASCADE
 
     );
 
@@ -42,9 +42,9 @@ CREATE TABLE map
       map_name VARCHAR(50),
       player1 VARCHAR(50),
       player2 VARCHAR(50),
-      FOREIGN KEY(map_name) REFERENCES map(map_name),
-      FOREIGN KEY (player1) REFERENCES player(player_name),
-      FOREIGN KEY (player1) REFERENCES player(player_name)
+      FOREIGN KEY(map_name) REFERENCES map(map_name) ON DELETE CASCADE ,
+      FOREIGN KEY (player1) REFERENCES player(player_name) ON DELETE CASCADE ,
+      FOREIGN KEY (player1) REFERENCES player(player_name) ON DELETE CASCADE
     );
 
     commit;

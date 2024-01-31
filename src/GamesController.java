@@ -7,11 +7,26 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Clase de las partidas
+ */
 public class GamesController {
+    /**
+     * Atributo necesario para conectarte a la base de datos
+     */
     private Connection connection;
+
+    /**
+     * Constructor
+     * @param connection Requiere la clase para conectarse a la base de datos.
+     */
 
     public GamesController(Connection connection) {this.connection = connection;}
 
+    /**
+     * Método para crear la tabla en al base de datos.
+     * @throws SQLException
+     */
     public void createTable() throws SQLException {
 
         Statement sts = connection.createStatement();
@@ -21,13 +36,18 @@ public class GamesController {
                 "map_name VARCHAR(50),\n" +
                 "player1 VARCHAR(50),\n" +
                 "player2 VARCHAR(50),\n" +
-                "FOREIGN KEY(map_name) REFERENCES map(map_name),\n" +
-                "FOREIGN KEY (player1) REFERENCES player(player_name),\n" +
-                "FOREIGN KEY (player1) REFERENCES player(player_name)\n)";
+                "FOREIGN KEY(map_name) REFERENCES map(map_name) ON DELETE CASCADE,\n" +
+                "FOREIGN KEY (player1) REFERENCES player(player_name) ON DELETE CASCADE,\n" +
+                "FOREIGN KEY (player1) REFERENCES player(player_name) ON DELETE CASCADE\n)";
 
         sts.executeUpdate(sql);
     }
 
+    /**
+     * método para leer los ficheros CSV y hacer un select basándose en los datos que a leido.
+     * @throws IOException
+     * @throws SQLException
+     */
     public void readDataFromCSV() throws IOException, SQLException {
         CSVReader reader = new CSVReader(new FileReader("resources/games.csv"));
         String[] data = null;
