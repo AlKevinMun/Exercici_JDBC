@@ -11,10 +11,7 @@ public class ACBMain {
 	public static void main(String[] args) throws IOException, SQLException, ParseException {
 		ACBMenu menu = new ACBMenu();
 
-		/**
-		 * Instancia del maincontroller para llamar a sus métodos
-		 */
-		MainController mainController = new MainController();
+        MainController mainController = new MainController();
 
 		int option = menu.mainMenu();
 		int optionTable;

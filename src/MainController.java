@@ -44,7 +44,7 @@ public class MainController {
     /**
      * Método para realizar un select en una columna concreta.
      * @param option Se le proporciona la opción del menu anterior para asi saber cual es el nombre de la columna
-     * @throws SQLException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public void selectRegisterSpecific(Integer option) throws SQLException {
 
@@ -68,14 +68,14 @@ public class MainController {
         System.out.println(resultString);
         System.out.println("¿Que columna quieres mostrar? (nombre de la columna)");
         String column = read();
-        System.out.println("");
+        System.out.println();
         String[] columnToCompare = resultString.split(",");
         for (int i = 0; i < columnToCompare.length ; i++) {
 
             resultStringBuilder.setLength(0);
             if (column.equals(columnToCompare[i])){
 
-                String selectColumns = "SELECT "+ column+" from " +tableNames.get(option)+"";
+                String selectColumns = "SELECT "+ column+" from " +tableNames.get(option);
                 resultSet = sts.executeQuery(selectColumns);
 
                 while (resultSet.next()) {
@@ -98,7 +98,7 @@ public class MainController {
     /**
      * Método para realizar un select en una columna concreta, junto a añadirle una condición.
      * @param option Se le proporciona la opción del menu anterior para asi saber cual es el nombre de la columna
-     * @throws SQLException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public void selectRegisterSpecificText(Integer option) throws SQLException {
 
@@ -121,11 +121,11 @@ public class MainController {
         System.out.println(resultString +" *");
         System.out.println("¿Que columna quieres mostrar? (nombre de la columna)");
         String column = read();
-        System.out.println("");
+        System.out.println();
         System.out.println(resultString);
         System.out.println("Inserta la columna sobre la que quieres buscar: ");
         String filterColumn = read();
-        System.out.println("");
+        System.out.println();
         System.out.println("Inserta el texto que quieres buscar: ");
         String filter = read();
         String[] columnToCompare = resultString.split(",");
@@ -158,7 +158,7 @@ public class MainController {
     /**
      * Método para realizar un select en una columna concreta junto a una condición.
      * @param option Se le proporciona la opción del menu anterior para asi saber cual es el nombre de la columna
-     * @throws SQLException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public void selectRegisterWithCondition(Integer option) throws SQLException {
 
@@ -181,11 +181,11 @@ public class MainController {
         System.out.println(resultString +" *");
         System.out.println("¿Que columna quieres mostrar? (nombre de la columna)");
         String column = read();
-        System.out.println("");
+        System.out.println();
         System.out.println(resultString);
         System.out.println("Inserta la columna sobre la que quieres aplicar la condicion: ");
         String filterColumn = read();
-        System.out.println("");
+        System.out.println();
         System.out.println("Inserta la condicion: ");
         String conditon = read();
         String[] columnToCompare = resultString.split(",");
@@ -217,7 +217,7 @@ public class MainController {
     /**
      * Método para realizar un update dentro de la base de datos.
      * @param option Se le proporciona la opción del menu anterior para asi saber cual es el nombre de la columna
-     * @throws SQLException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public void updateRegisterSpecific(Integer option) throws SQLException {
 
@@ -240,10 +240,10 @@ public class MainController {
         System.out.println(resultString +" *");
         System.out.println("¿Que columna quieres editar? (nombre de la columna)");
         String column = read();
-        System.out.println("");
+        System.out.println();
         System.out.println("Inserta por lo que lo quieres cambiar");
         String condicion = read();
-        System.out.println("");
+        System.out.println();
         System.out.println("Inserta la condicion: ");
         String conditon = read();
         String[] columnToCompare = resultString.split(",");
@@ -265,7 +265,7 @@ public class MainController {
     /**
      * Método para realizar un delete en una columna concreta, o de una condición, etc...
      * @param option Se le proporciona la opción del menu anterior para asi saber cual es el nombre de la columna
-     * @throws SQLException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public void deleteRegister(Integer option) throws SQLException {
 
@@ -288,10 +288,10 @@ public class MainController {
         System.out.println(resultString +" *");
         System.out.println("¿Que columna quieres editar? (nombre de la columna)");
         String column = read();
-        System.out.println("");
+        System.out.println();
         System.out.println("Inserta una condicion");
         String condicion = read();
-        System.out.println("");
+        System.out.println();
 
         String[] columnToCompare = resultString.split(",");
         for (int i = 0; i < columnToCompare.length ; i++) {
@@ -313,7 +313,7 @@ public class MainController {
     /**
      * Método para eliminar una tabla de la base de datos.
      * @param option Se le proporciona la opción del menu anterior para asi saber cual es el nombre de la columna
-     * @throws SQLException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public void deleteTable(Integer option) throws SQLException {
         if (option==5) {}
@@ -332,7 +332,7 @@ public class MainController {
     /**
      * Método para crear una tabla de la base de datos.
      * @param option Se le proporciona la opción del menu anterior para asi saber cual es el nombre de la columna
-     * @throws SQLException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public void createTable(int option) throws SQLException {
         switch (option){
@@ -354,8 +354,8 @@ public class MainController {
 
     /**
      * método para poblar las tablas de información.
-     * @throws SQLException
-     * @throws IOException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
+     * @throws IOException Salta la exception si no puede leer el fichero.
      */
     public void fillTables() throws SQLException, IOException {
         // Crear un if para cada uno de los read data para detectar si tienen o no contenido.
@@ -370,7 +370,7 @@ public class MainController {
      * @param connection La connexion con la base de datos
      * @param tableName El nombre de la tabla que se quiere comprobar si existe
      * @return True o False, dependiendo de si la tabla es existente o no
-     * @throws SQLException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public boolean tableExists(Connection connection, String tableName) throws SQLException {
         try (Statement statement = connection.createStatement()) {

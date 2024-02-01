@@ -24,7 +24,7 @@ public class MapController {
     public MapController(Connection connection) {this.connection = connection;}
     /**
      * método para crear la tabla en al base de datos.
-     * @throws SQLException
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public void createTable() throws SQLException {
 
@@ -40,8 +40,8 @@ public class MapController {
     }
     /**
      * método para leer los ficheros CSV y hacer un select basándose en los datos que a leido.
-     * @throws IOException
-     * @throws SQLException
+     * @throws IOException Salta la exception si no puede leer el fichero.
+     * @throws SQLException Salta una exception si la sentencia SQL falla.
      */
     public void readDataFromCSV() throws IOException, SQLException {
         CSVReader reader = new CSVReader(new FileReader("resources/map.csv"));
